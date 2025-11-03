@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import '../models/date.dart';
+import '../models/appointment.dart';
 
 class ApiService {
   // definisco gli URL base per gli endpoint
   final String authBaseUrl = 'https://reqres.in/api';
-  final String datesBaseUrl = 'https://jsonplaceholder.typicode.com';
+  final String appointmentsBaseUrl = 'https://jsonplaceholder.typicode.com';
 
   // Client http per fare le richieste
   final http.Client _client;
@@ -36,15 +36,17 @@ class ApiService {
   }
 
   // metodo per creare un nuovo appuntamento
-  Future<Map<String, dynamic>> createDate(Date date) async {
+  Future<Map<String, dynamic>> createAppointment(
+    Appointment appointment,
+  ) async {
     try {
       // invio una richiesta http POST
       final response = await _client.post(
-        Uri.parse('$datesBaseUrl/posts'),
+        Uri.parse('$appointmentsBaseUrl/posts'),
         headers: {'Content-Type': 'application/json'},
         // converto il modello in un Map
         // poi converto il Map in un Json
-        body: jsonEncode(date.toJson()),
+        body: jsonEncode(appointment.toJson()),
       );
 
       // controllo se è stato creato l'appuntamento
@@ -54,7 +56,7 @@ class ApiService {
       } else {
         final body = response.body;
         throw Exception(
-          'Failed to create date (${response.statusCode}): $body',
+          'Failed to create appointment (${response.statusCode}): $body',
         );
       }
     } catch (e) {
@@ -63,10 +65,12 @@ class ApiService {
   }
 
   // metodo per ottenere tutti gli appuntamenti
-  Future<List<Date>> getDates() async {
+  Future<List<Appointment>> getAppointments() async {
     try {
       // invio una richiesta http GET
-      final response = await _client.get(Uri.parse('$datesBaseUrl/posts'));
+      final response = await _client.get(
+        Uri.parse('$appointmentsBaseUrl/posts'),
+      );
       // controllo se la richiesta ha avuto successo
       if (response.statusCode == 200) {
         // converto il Json in una List
@@ -76,7 +80,7 @@ class ApiService {
           // prendo la data e l'ora corrente
           final now = DateTime.now();
           // restituisco un appuntamento per ogni elemento della lista
-          return Date(
+          return Appointment(
             day: now,
             startTime: now,
             endTime: now.add(Duration(hours: 1)),
@@ -86,7 +90,7 @@ class ApiService {
           // converto il risultato in una List
         }).toList();
       } else {
-        throw Exception('Error loading dates');
+        throw Exception('Error loading appointments');
       }
     } catch (e) {
       throw Exception('Network Error: $e');

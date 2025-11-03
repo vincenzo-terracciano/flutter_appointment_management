@@ -1,4 +1,4 @@
-class Date {
+class Appointment {
   // definisco le proprietà del modello dell'appuntamento
   final DateTime day;
   final DateTime startTime;
@@ -7,7 +7,7 @@ class Date {
   final String? notes;
 
   // costruttore
-  Date({
+  Appointment({
     required this.day,
     required this.startTime,
     required this.endTime,
@@ -25,8 +25,8 @@ class Date {
   };
 
   // converto il Json in un appuntamento
-  factory Date.fromJson(Map<String, dynamic> json) {
-    return Date(
+  factory Appointment.fromJson(Map<String, dynamic> json) {
+    return Appointment(
       day: DateTime.parse(json['day'] as String),
       startTime: DateTime.parse(json['startTime'] as String),
       endTime: DateTime.parse(json['endTime'] as String),
