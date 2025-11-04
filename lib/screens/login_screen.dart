@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_management/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/auth_provider.dart';
 
@@ -60,6 +61,14 @@ class LoginScreen extends ConsumerWidget {
 
                 try {
                   await ref.read(authProvider.notifier).login(email, password);
+                  // se il login ha successo naviga alla home
+                  if (context.mounted) {
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const HomeScreen(),
+                      ),
+                    );
+                  }
                 } catch (e) {
                   ScaffoldMessenger.of(
                     context,
