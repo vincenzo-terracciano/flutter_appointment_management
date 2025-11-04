@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:flutter/foundation.dart';
 import '../models/appointment.dart';
 
 class ApiService {
@@ -16,21 +17,31 @@ class ApiService {
   // metodo per il login
   Future<String> login(String email, String password) async {
     try {
+      debugPrint('Email: $email');
+      debugPrint('Password: $password');
       // invio una richiesta http POST
       final response = await _client.post(
         Uri.parse('$authBaseUrl/login'),
-        headers: {'Content-Type': 'application/json'},
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': 'reqres-free-v1',
+        },
         body: jsonEncode({'email': email, 'password': password}),
       );
+
+      debugPrint('Status Code: ${response.statusCode}');
+      debugPrint('Response Body: ${response.body}');
 
       // controllo se la richiesta ha avuto successo
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        debugPrint('Login successful! Token: ${data['token']}');
         return data['token'] as String;
       } else {
         throw Exception('Login failed: ${response.statusCode}');
       }
     } catch (e) {
+      debugPrint(e.toString());
       throw Exception('Network error: $e');
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_appointment_management/screens/login_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -15,9 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const Scaffold(
-        body: Center(child: Text("Welcome to Flutter Date Management")),
-      ),
+      home: LoginScreen(),
     );
   }
 }
