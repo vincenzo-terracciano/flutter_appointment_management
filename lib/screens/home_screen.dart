@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'tabs/add_appointment_tab.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   // costruttore
@@ -27,7 +28,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         ),
       ),
       body: _currentIndex == 0
-          ? const Center(child: Text('Tab 1 - Nuovo Appuntamento'))
+          ? const AddAppointmentTab()
           : _currentIndex == 1
           ? const Center(child: Text('Tab 2 - Lista Appuntamenti'))
           : const Center(child: Text('Tab 3 - Profilo')),
