@@ -181,36 +181,42 @@ class _AddAppointmentTabState extends ConsumerState<AddAppointmentTab> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           // pulsante per la selezione della data
-          ElevatedButton(onPressed: pickDate, child: Text(_dateText())),
-          const SizedBox(height: 8),
+          ElevatedButton.icon(
+            icon: const Icon(Icons.calendar_today),
+            label: Text(_dateText()),
+            onPressed: pickDate,
+          ),
+          const SizedBox(height: 20),
 
           Row(
             children: [
               Expanded(
                 // pulsante per la selezione dell'ora di inzio
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.access_time),
+                  label: Text(_timeText(startTime, 'Ora inizio')),
                   onPressed: pickStartTime,
-                  child: Text(_timeText(startTime, 'Ora inizio')),
                 ),
               ),
-              const SizedBox(width: 8),
+              const SizedBox(width: 20),
               Expanded(
                 // pulsante per la selezione dell'ora di fine
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
+                  icon: const Icon(Icons.access_time),
+                  label: Text(_timeText(endTime, 'Ora fine')),
                   onPressed: pickEndTime,
-                  child: Text(_timeText(endTime, 'Ora fine')),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
+          const SizedBox(height: 20),
 
           // Titolo
           TextField(
             controller: titleController,
             decoration: const InputDecoration(labelText: 'Titolo'),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 20),
 
           // Note
           TextField(
@@ -218,7 +224,7 @@ class _AddAppointmentTabState extends ConsumerState<AddAppointmentTab> {
             decoration: const InputDecoration(labelText: 'Note (opzionale)'),
             maxLines: 3,
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 20),
 
           // Bottone conferma
           ElevatedButton(

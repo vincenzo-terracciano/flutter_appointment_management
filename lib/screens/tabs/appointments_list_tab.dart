@@ -112,10 +112,22 @@ class _AppointmentsListTabState extends ConsumerState<AppointmentsListTab> {
                   : dateTimeText;
 
               // mostro gli appuntamenti con titolo, sottotitolo ed eventuali note
-              return ListTile(
-                title: Text(appointment.title),
-                subtitle: Text(subtitleText),
-                isThreeLine: hasNotes, // permette 3 righe se ci sono note
+              return Card(
+                margin: EdgeInsets.all(12),
+                elevation: 2,
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  title: Text(
+                    appointment.title,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  subtitle: Text(subtitleText),
+                  isThreeLine: hasNotes,
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.blue,
+                    child: Icon(Icons.event, color: Colors.white),
+                  ),
+                ),
               );
             },
           ),

@@ -41,6 +41,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             _currentIndex = index;
           });
         },
+        selectedItemColor: Colors.blue,
+        unselectedItemColor: Colors.grey,
+        selectedFontSize: 14,
+        unselectedFontSize: 12,
+        type: BottomNavigationBarType.fixed,
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Nuovo'),
           BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Lista'),

@@ -25,6 +25,7 @@ class ProfileTab extends ConsumerWidget {
             onPressed: () async {
               // logout rimuove token e pulisce state
               await ref.read(authProvider.notifier).logout();
+              // reset dello stato
               ref.read(userEmailProvider.notifier).state = null;
               // svuoto lista appuntamenti
               ref.read(appointmentsProvider.notifier).clear();
