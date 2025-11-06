@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appointment_management/screens/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/auth_provider.dart';
+import '../providers/other_providers.dart';
 
 class LoginScreen extends ConsumerWidget {
   LoginScreen({super.key});
@@ -61,6 +62,8 @@ class LoginScreen extends ConsumerWidget {
 
                 try {
                   await ref.read(authProvider.notifier).login(email, password);
+                  // salvo l'email per la ProfileTab
+                  ref.read(userEmailProvider.notifier).state = email.trim();
                   // se il login ha successo naviga alla home
                   if (context.mounted) {
                     Navigator.of(context).pushReplacement(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_appointment_management/screens/tabs/appointments_list_tab.dart';
+import 'package:flutter_appointment_management/screens/tabs/profile_tab.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'tabs/add_appointment_tab.dart';
 
@@ -32,7 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ? const AddAppointmentTab()
           : _currentIndex == 1
           ? const AppointmentsListTab()
-          : const Center(child: Text('Tab 3 - Profilo')),
+          : const ProfileTab(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) {
