@@ -38,14 +38,15 @@ class _AppointmentsListTabState extends ConsumerState<AppointmentsListTab> {
     final now = DateTime.now();
 
     // filtro per scartare appuntamenti passati
-    final filtered = appointments.where((a) {
+    final filtered = appointments.where((appointment) {
       // scarto quelli già terminati o quelli uguali all'ora attuale
-      if (a.endTime.isBefore(now) || a.endTime.isAtSameMomentAs(now)) {
+      if (appointment.endTime.isBefore(now) ||
+          appointment.endTime.isAtSameMomentAs(now)) {
         return false;
       }
       // se c'è una stringa di ricerca controllo se il titolo la contiene
       if (query.isNotEmpty &&
-          !a.title.toLowerCase().contains(query.toLowerCase())) {
+          !appointment.title.toLowerCase().contains(query.toLowerCase())) {
         return false;
       }
       return true;
@@ -63,8 +64,8 @@ class _AppointmentsListTabState extends ConsumerState<AppointmentsListTab> {
                 prefixIcon: Icon(Icons.search),
                 hintText: 'Cerca per titolo',
               ),
-              onChanged: (v) =>
-                  ref.read(searchQueryProvider.notifier).state = v,
+              onChanged: (searchText) =>
+                  ref.read(searchQueryProvider.notifier).state = searchText,
             ),
           ),
           const Expanded(child: Center(child: Text('Nessun Appuntamento'))),
@@ -83,7 +84,8 @@ class _AppointmentsListTabState extends ConsumerState<AppointmentsListTab> {
               prefixIcon: Icon(Icons.search),
               hintText: 'Cerca per titolo',
             ),
-            onChanged: (v) => ref.read(searchQueryProvider.notifier).state = v,
+            onChanged: (searchText) =>
+                ref.read(searchQueryProvider.notifier).state = searchText,
           ),
         ),
         Expanded(
