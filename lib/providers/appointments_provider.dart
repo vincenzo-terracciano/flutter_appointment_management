@@ -30,6 +30,7 @@ class AppointmentsNotifier extends StateNotifier<List<Appointment>> {
   Future<void> addAppointment(Appointment appointment) async {
     try {
       await _api.createAppointment(appointment);
+      // Aggiungo il nuovo appuntamento all'inizio della lista
       state = [appointment, ...state];
     } catch (e) {
       rethrow;

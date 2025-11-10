@@ -17,15 +17,8 @@ class AppointmentsListTab extends ConsumerStatefulWidget {
 
 // stato della tab 2
 class _AppointmentsListTabState extends ConsumerState<AppointmentsListTab> {
-  @override
-  void initState() {
-    super.initState();
-
-    // carica gli appuntamenti all'avvio della tab
-    Future.microtask(
-      () => ref.read(appointmentsProvider.notifier).loadAppointments(),
-    );
-  }
+  // Non carichiamo dati fake dal server
+  // La lista mostra solo gli appuntamenti creati dall'utente
 
   // interfaccia tab 2
   @override
